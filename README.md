@@ -9,3 +9,4 @@
 - localhost:8080/api/payment/callback
 
 - стек - реляционная БД, ларавел 11, редис для кэширования
+- решаемая задача - https://gitlab.com/ComboAgency/test-backend
