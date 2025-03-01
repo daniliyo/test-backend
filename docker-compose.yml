@@ -11,6 +11,7 @@ services:
     depends_on:
       - php
       - pgsql
+      - pgsql_for_test
       - redis
       
   php:
@@ -32,6 +33,18 @@ services:
         POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - ./postgre:/var/lib/postgresql/data
+
+  pgsql_for_test:
+    image: ronasit/postgres:12.5
+    ports:
+        - 5433:5432
+    environment:
+        POSTGRES_PASSWORD: "secret123"
+        POSTGRES_USER: pguser_test
+        POSTGRES_DB: pgdb_test
+        POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - ./postgre_for_test:/var/lib/postgresql/data
 
   redis:
     image: redis:6.2.3
