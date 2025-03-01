@@ -1,4 +1,5 @@
 /postgre
+/postgre_for_test
 /src/.phpunit.cache
 /src/node_modules
 /src/public/build
