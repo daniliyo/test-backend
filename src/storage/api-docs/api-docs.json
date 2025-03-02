@@ -1,0 +1,276 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Documentation API",
+        "description": "Documentation for Product controller",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Получение списка товаров",
+                "operationId": "d97d1c3727cbac49708b85f7d11f7d58",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        },
+                        "example": 2
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешный ответ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Product"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Create product",
+                "operationId": "785644b7d7dd38af4b51dafd0fbc1b6d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "price",
+                                    "stock"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Some desc"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 100.05
+                                    },
+                                    "stock": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Продукт успешно создан",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Product"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка валидации"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/api/products/{$id}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Получение одного товара",
+                "operationId": "99d2439c58270cfe15e17548566516ef",
+                "responses": {
+                    "200": {
+                        "description": "Успешный ответ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Product"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Продукт не найден"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Удаление товара",
+                "operationId": "a3134e5be36272484f0716e9e9b282f5",
+                "responses": {
+                    "200": {
+                        "description": "Успешный ответ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Product"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Продукт не найден"
+                    }
+                }
+            }
+        },
+        "api/products/{$id}": {
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "operationId": "6a4e0ca60bfb9a4fb24cc04467fd7c4b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "price",
+                                    "stock"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Some desc"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 100.05
+                                    },
+                                    "stock": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Продукт успешно создан",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Product"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Продукт не найден"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Product": {
+                "title": "Product",
+                "description": "Some description for product schema",
+                "properties": {
+                    "id": {
+                        "description": "Ид товара",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "description": "Название товара",
+                        "type": "string",
+                        "example": "Продукт 1"
+                    },
+                    "description": {
+                        "description": "Description product",
+                        "type": "string",
+                        "example": "Some description"
+                    },
+                    "price": {
+                        "description": "price product",
+                        "type": "number",
+                        "format": "float",
+                        "example": 100.05
+                    },
+                    "stock": {
+                        "description": "Stock product",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "created_at": {
+                        "description": "Data created products",
+                        "type": "timestamp",
+                        "example": "2025-03-02T12:00:00Z"
+                    },
+                    "updated_at": {
+                        "description": "Date updated product",
+                        "type": "timestamp",
+                        "example": "2025-03-02T12:00:00Z"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Products",
+            "description": "Products"
+        }
+    ]
+}
