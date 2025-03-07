@@ -7,13 +7,14 @@ use App\Jobs\SaveParsedDataJob;
 
 class ParsingService
 {
-    public function __construct(protected ParserContract $parser) {}
+    public function __construct(protected ParserFactory $factory) {}
 
-    public function parse()
+    public function parse(string $type)
     {
-        $data = $this->parser->fetchData();
+        $parser = $this->factory->create($type);
         
-        $parsedData = $this->parser->parse($data);
+        $data = $parser->fetchData();
+        $parsedData = $parser->parse($data);
 
         foreach($parsedData as $item){
             SaveParsedDataJob::dispatch($item);

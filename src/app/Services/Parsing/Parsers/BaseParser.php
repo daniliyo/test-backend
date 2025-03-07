@@ -7,10 +7,12 @@ use App\Services\Parsing\Contract\ParserContract;
 
 abstract class BaseParser implements ParserContract 
 {
+    public function __construct(protected string $url) { }
+
     public function fetchData(): string
     {
         $url = static::getUrl();
         
-        return Http::get($url)->body();
+        return Http::get($this->url)->body();
     }
 }

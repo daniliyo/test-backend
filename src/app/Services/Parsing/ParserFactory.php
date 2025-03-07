@@ -7,10 +7,10 @@ use App\Services\Parsing\Parsers\CbrParser;
 
 class ParserFactory
 {
-    static public function create(string $type): ParserContract
+    public function create(string $type): ParserContract
     {
         return match($type) {
-            'cbr' => new CbrParser(),
+            'cbr' => app()->make(CbrParser::class),
             default => throw new \Exception("Unknown parser type"),
         };
     } 

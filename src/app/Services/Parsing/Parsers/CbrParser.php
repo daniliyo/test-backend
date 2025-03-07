@@ -6,6 +6,11 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class CbrParser extends BaseParser
 {
+    public function __construct()
+    {
+        parent::__construct("https://www.cbr.ru/scripts/XML_daily.asp");
+    }
+    
     public function parse(string $data): array
     {
         $crawler = new Crawler($data);
