@@ -9,6 +9,9 @@ use App\Services\Parsing\ParsingService;
 
 class CurrencyParserCommand extends Command
 {
+    public function __construct(protected ParsingService $parsingService){
+        parent::__construct();
+    }
     /**
      * The name and signature of the console command.
      *
@@ -28,9 +31,6 @@ class CurrencyParserCommand extends Command
      */
     public function handle()
     {
-        $parser = ParserFactory::create('cbr');
-        $service = new ParsingService($parser);
-        $service->parse();
-        
+        $this->parsingService->parse('cbr');
     }
 }
