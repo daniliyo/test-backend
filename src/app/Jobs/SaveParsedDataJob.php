@@ -15,6 +15,12 @@ class SaveParsedDataJob implements ShouldQueue
 
     public function handle(CurrencyService $currencyService): void
     {
-        $currencyService->createCurrency($this->data);
+        try {
+            \Log::info('Запуск SaveParsedDataJob', $this->data);
+            $currencyService->createCurrency($this->data);
+            \Log::info('Успешно выполнена');
+        } catch (\Throwable $e) {
+            \Log::info('Ошибка выполнения', ['message' => $e->getMessage()]);
+        }
     }
 }

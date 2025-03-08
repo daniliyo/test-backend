@@ -31,6 +31,7 @@ class CurrencyParserCommand extends Command
      */
     public function handle()
     {
-        $this->parsingService->parse('cbr');
+        $data = $this->parsingService->parse('cbr');
+        $this->parsingService->addDataToJobs($data);
     }
 }
