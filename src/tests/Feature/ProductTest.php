@@ -8,6 +8,8 @@ use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
+    use RefreshDatabase;
+    
     public function test_create_product()
     {
         $response = $this->postJson('/api/products', [
